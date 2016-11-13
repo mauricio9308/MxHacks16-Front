@@ -1,6 +1,3 @@
-/**
- * Created by mauriciolara on 6/15/16.
- */
 (function(){
     'use script';
 
@@ -19,9 +16,6 @@
         return {
             getShortDurationToken : getShortDurationToken,
             setShortDurationToken : setShortDurationToken,
-            getLongDurationToken : getLongDurationToken,
-            getExtraLongDurationToken : getExtraLongDurationToken,
-            setLongDurationTokens : setLongDurationTokens,
             setCredentials : setCredentials,
             clearCredentials : clearCredentials
         };
@@ -41,39 +35,10 @@
         }
 
         /**
-         * Recovers the long duration token from the local storage
-         * */
-        function getLongDurationToken(){
-            return $localStorage.tk2;
-        }
-
-        /**
-         * Sets the long and extra long duration tokens for the client
-         * */
-        function setLongDurationTokens( longDurationToken, extraLongDurationToken ){
-            //Setting the long duration token
-            $localStorage.tk2 = longDurationToken;
-
-            //Only setting the extra long duration token if it's passed
-            if( extraLongDurationToken ){
-                $localStorage.tk3 = extraLongDurationToken;
-            }
-        }
-
-        /**
-         * Recovers the extra long duration token from the local storage
-         * */
-        function getExtraLongDurationToken(){
-            return $localStorage.tk3;
-        }
-
-        /**
          * Sets the current credentials in the case of a login / signup
          * */
-        function setCredentials( shortDurationToken, longDurationToken, extraLongDurationToken ){
+        function setCredentials( shortDurationToken ){
             $localStorage.tk1 = shortDurationToken;
-            $localStorage.tk2 = longDurationToken;
-            $localStorage.tk3 = extraLongDurationToken;
         }
 
         /**
@@ -81,8 +46,6 @@
          * */
         function clearCredentials(){
             delete $localStorage.tk1;
-            delete $localStorage.tk2;
-            delete $localStorage.tk3;
         }
     }
 

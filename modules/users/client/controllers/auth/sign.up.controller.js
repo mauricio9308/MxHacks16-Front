@@ -1,6 +1,3 @@
-/**
- * Created by Mauricio Lara on 6/16/16.
- */
 (function () {
     'use strict';
 
@@ -9,38 +6,20 @@
         .controller('SignUpController', SignUpController);
 
     SignUpController.$inject = ['$scope', '$state', 'AuthenticationService',
-        'CurrentSessionService', 'PasswordValidator', 'CitiesService', 'ToastService'];
+        'CurrentSessionService', 'PasswordValidator', '$rootScope'];
 
     function SignUpController($scope, $state, AuthenticationService, CurrentSessionService,
-                                      PasswordValidator, CitiesService, ToastService) {
+                                      PasswordValidator, $rootScope ) {
         var vm = this;
 
         //Public API
         vm.getPopoverMsg = PasswordValidator.getPopoverMsg;
         vm.signup = signup;
-        vm.fetchCities = fetchCities;
 
         // If user is signed in then redirect back home
         if (CurrentSessionService.isUserLoggedIn()) {
             $state.go('home');
-        }else{
-            /* we try to obtain the cities */
-            fetchCities();
         }
-
-        /**
-         * We fetch the list of the cities from the API
-         * */
-        function fetchCities(){
-            CitiesService.getCities().then(function( cities ){
-                //Setting the response to the view data
-                vm.cities = cities;
-            }).catch(function( errorResponse ){
-                //Error obtaining the cities from the server
-                ToastService.showToast('Error al obtener las ciudades');
-            });
-        }
-
 
         /**
          * Function in charge of the user sign up to the application
@@ -58,12 +37,14 @@
 
             console.log('Sign up of the user... ' + JSON.stringify( vm.userInformation ));
             /* simple sign up of users in the platform */
-            AuthenticationService.signUp( vm.userInformation.firstName, vm.userInformation.lastName,
-                vm.userInformation.city, vm.userInformation.telephone, vm.userInformation.password,
+            AuthenticationService.signUp( vm.userInformation.name, vm.userInformation.password,
                 vm.userInformation.email )
                 .then(function( response ){
                     /* success doing the sing up the given user */
                     console.debug('Successful sign up of a user in the platform');
+
+                    /* we propagate the update */
+                    $rootScope.$broadcast('UserSessionUpdate');
 
                     //Redirecting to the logged in states of the platform
                     $state.go('home');

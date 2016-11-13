@@ -19,7 +19,8 @@
         return{
             isUserLoggedIn : isUserLoggedIn,
             setUserInformation : setUserInformation,
-            getUserInformation : getUserInformation
+            getUserInformation : getUserInformation,
+            getUserType : getUserType
         };
 
         /**
@@ -41,16 +42,22 @@
         }
 
         /**
+         * Returns the current user type
+         * */
+        function getUserType(){
+            return isUserLoggedIn() ? getUserInformation().type : -1;
+        }
+
+        /**
          * Saves the current user information
          * */
-        function setUserInformation( firstName, lastName, profileImageUrl, workerId ){
+        function setUserInformation( name, email, type ){
 
             /* setting the information to be saved */
             var userInformationReference = {
-                firstName : firstName,
-                lastName : lastName,
-                profileImageUrl : profileImageUrl,
-                workerId : workerId
+                name : name,
+                email: email,
+                type: type
             };
 
             // Saving the user information

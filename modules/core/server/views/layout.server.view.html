@@ -35,45 +35,37 @@
     <md-sidenav
             class="md-sidenav-left"
             md-component-id="main-sidebar"
-            md-is-locked-open="$mdMedia('gt-md') && vm.isUserLoggedIn"
             md-disable-backdrop
             style="position: fixed; top: 64px;"
             md-whiteframe="4">
         <md-toolbar class="md-theme-indigo" layout="row">
-            <img class="circle-image" src="modules/core/client/img/brand/admin-logo.jpg" style="margin-left: 16px;padding-right: -10px;margin-right: 0px;">
             <h1 class="md-toolbar-tools" flex style="padding-bottom: 10px;">mauricio9308@gmail.com</h1>
         </md-toolbar>
         <md-content layout-padding ng-controller="SideNavController as vm">
-            <md-subheader class="md-no-sticky">Administración de Usuarios</md-subheader>
+
+            <md-subheader class="md-no-sticky">Legislaciones</md-subheader>
+            <md-list-item md-ink-ripple >
+                <p ui-sref="legislations-list">Ver Legislaciones</p>
+            </md-list-item>
+            <md-divider></md-divider>
+
+
+            <md-subheader class="md-no-sticky">Perfil</md-subheader>
+            <md-list-item md-ink-ripple>
+                <p>Ver mi perfil</p>
+            </md-list-item>
+            <md-divider></md-divider>
+
+
+            <md-subheader class="md-no-sticky">Administración</md-subheader>
+            <md-list-item md-ink-ripple>
+                <p>Legislaciones</p>
+            </md-list-item>
+            <md-list-item md-ink-ripple>
+                <p>Políticos</p>
+            </md-list-item>
             <md-list-item md-ink-ripple>
                 <p>Usuarios</p>
-            </md-list-item>
-            <md-list-item md-ink-ripple>
-                <p>Trabajadores</p>
-            </md-list-item>
-
-            <md-divider></md-divider>
-            <md-subheader class="md-no-sticky">Administración de Regiones</md-subheader>
-            <md-list-item md-ink-ripple >
-                <p ui-sref="city-list">Ciudades</p>
-            </md-list-item>
-            <md-list-item md-ink-ripple >
-                <p ui-sref="state-list">Estados</p>
-            </md-list-item>
-            <md-list-item md-ink-ripple >
-                <p ui-sref="country-list">Paises</p>
-            </md-list-item>
-
-            <md-divider></md-divider>
-            <md-subheader class="md-no-sticky">Administración de Contenido</md-subheader>
-            <md-list-item md-ink-ripple>
-                <p>Reportes</p>
-            </md-list-item>
-            <md-list-item md-ink-ripple>
-                <p>Reseñas</p>
-            </md-list-item>
-            <md-list-item md-ink-ripple>
-                <p>Categorías</p>
             </md-list-item>
             <md-divider></md-divider>
         </md-content>

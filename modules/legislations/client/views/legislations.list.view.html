@@ -1,0 +1,42 @@
+<!-- List of the legislation available in the server -->
+<section>
+    <!-- Loading container -->
+    <md-content ng-show="vm.isLoading">
+        <md-progress-circular
+                class="center-horizontal"
+                md-mode="indeterminate"
+                md-diameter="100">
+        </md-progress-circular>
+    </md-content>
+
+    <!-- Error container -->
+    <md-content ng-show="!vm.isLoading && vm.isInErrorState">
+        <div class="center-horizontal">
+            <h1>¡Oh no! Hubo un error</h1>
+            <p>{{ vm.errorMessage }}</p>
+            <md-button class="md-primary md-raised" ng-click="vm.onRefreshClicked()">Reintentar</md-button>
+        </div>
+    </md-content>
+
+    <!-- List container -->
+    <md-content ng-hide="vm.isLoading || vm.isInErrorState">
+        <h1>Legislaciones</h1>
+
+        <!-- Container for the list of items in the platform -->
+        <md-list>
+            <md-list-item class="md-2-line ripple-container" md-ink-ripple
+                          ng-repeat="item in vm.items">
+                <div class="md-list-item-text">
+                    <h3>{{ item.name }}</h3>
+                    <p>{{ item.name }}</p>
+                </div>
+            </md-list-item>
+        </md-list>
+
+        <!-- Button for adding new cities -->
+        <md-button class="md-fab fab-button" aria-label="Añadir Legislación">
+            <md-icon md-font-library="material-icons">add</md-icon>
+        </md-button>
+
+    </md-content>
+</section>

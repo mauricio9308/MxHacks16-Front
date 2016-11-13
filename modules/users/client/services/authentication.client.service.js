@@ -5,20 +5,20 @@
         .module('users.services')
         .factory('AuthenticationService', AuthenticationService);
 
-    AuthenticationService.$inject = ['$http', '$q', 'ApiValues', 'TokenHandlerService', 'CurrentSessionService', '$localStorage'];
+    AuthenticationService.$inject = ['$http', '$q', 'ApiValues',
+        'TokenHandlerService', 'CurrentSessionService', '$localStorage'];
 
     /**
      * Service in charge of the handling of the authentication request for the API
      * */
-    function AuthenticationService($http, $q, ApiValues, TokenHandlerService, CurrentSessionService, $localStorage) {
+    function AuthenticationService($http, $q, ApiValues, TokenHandlerService,
+                                   CurrentSessionService, $localStorage) {
 
         //public API
         return {
             signIn: signIn,
             signUp: signUp,
-            logout : logout,
-            refreshShortDurationToken: refreshShortDurationToken,
-            refreshLongDurationToken: refreshLongDurationToken
+            logout : logout
         };
 
         /**
@@ -48,11 +48,12 @@
                     /* successful login response */
                     var responseData = response.data;
 
+                    // Printing the response
+                    console.log( JSON.stringify( response.data ));
+
                     /* updating the token references */
                     TokenHandlerService.setCredentials(
-                        responseData.shortDurationToken,
-                        responseData.longDurationToken,
-                        responseData.extraLongDurationToken
+                        responseData.applicationToken
                     );
 
                     //Getting the reference of the user
@@ -60,14 +61,13 @@
 
                     /* saving the current session information */
                     CurrentSessionService.setUserInformation(
-                        signInUser.firstName,
-                        signInUser.lastName,
-                        signInUser.profileImageURL,
-                        signInUser.workerId
+                        signInUser.name,
+                        signInUser.email,
+                        signInUser.type
                     );
 
                     // Returning the success
-                    signInDefer.resolve( response.data );
+                    signInDefer.resolve( responseData );
                 }).catch(function( response ){
                     /* error while logging in */
                     console.debug( response.data );
@@ -91,12 +91,12 @@
         /**
          * Operates the sign up process petition of a given user
          * */
-        function signUp( firstName, lastName, city, telephone, password, email ) {
+        function signUp( name, password, email ) {
             //Creating the sign up defer object
             var signUpDefer = $q.defer();
 
             /* validating the pass of the data */
-            if( !firstName || !lastName || !city || !telephone || !password || !email ){
+            if( !name || !password || !email ){
                 //Not all the parameters were passed
                 signUpDefer.reject({
                    message: 'You need to provide all the sign up parameters'
@@ -105,36 +105,30 @@
 
             //Building the sign up data
             var signUpData = {
-                firstName : firstName,
-                lastName : lastName,
-                city : city,
-                telephone : telephone,
+                name: name,
                 password: password,
-                email : email
+                email: email
             };
 
             /* doing the sign up request */
-            $http.post( ApiValues.buildAbsolutePath( 'auth/signup/1'), signUpData)
+            $http.post( ApiValues.buildAbsolutePath( 'auth/signup '), signUpData)
                 .then(function( response ){
                     /* successful sign up */
                     var responseData = response.data;
 
                     //Setting the login credentials
                     TokenHandlerService.setCredentials(
-                        responseData.shortDurationToken,
-                        responseData.longDurationToken,
-                        responseData.extraLongDurationToken
+                        responseData.applicationToken
                     );
 
                     //Getting the reference of the user
-                    var signInUser = responseData.user;
+                    var signInUser = responseData.userInfo;
 
                     /* saving the current session information */
                     CurrentSessionService.setUserInformation(
-                        signInUser.firstName,
-                        signInUser.lastName,
-                        signInUser.profileImageURL,
-                        signInUser.workerId
+                        signInUser.name,
+                        signInUser.email,
+                        signInUser.type
                     );
 
                     //Resolving the sign up request as successful
@@ -148,77 +142,6 @@
                 });
 
             return signUpDefer.promise;
-        }
-
-        /**
-         * Refreshes the current short duration token from the API
-         * */
-        function refreshShortDurationToken() {
-            //Creating the defer object
-            var refreshDefer = $q.defer();
-
-            /* data to be sent to the server */
-            var refreshPayload = {
-                longDurationToken: TokenHandlerService.getLongDurationToken()
-            };
-
-            /* requesting the token update */
-            $http.post(ApiValues.buildAbsolutePath( 'auth/refresh/token/short' ), refreshPayload)
-                .then(function (response) {
-                    /* handling the successful result */
-                    var refreshResult = response.data;
-
-                    //We set the short duration token
-                    TokenHandlerService.setShortDurationToken( refreshResult.shortDurationToken );
-
-                    //We resolve the successful response
-                    refreshDefer.resolve( true );
-                }).catch(function (response) {
-                    /* handling the error response from the server */
-                    console.debug( JSON.stringify( response.data  ));
-
-                    //Rejecting the response
-                    refreshDefer.reject( response.data );
-                });
-
-            //Returning the promise object
-            return refreshDefer.promise;
-        }
-
-        /**
-         * Refreshes the current long duration token from the API
-         * */
-        function refreshLongDurationToken() {
-            //Creating the defer object
-            var refreshDefer = $q.defer();
-
-            /* building the request data */
-            var refreshPayload = {
-                extraLongDurationToken : TokenHandlerService.getExtraLongDurationToken()
-            };
-
-            /* requesting the long duration update */
-            $http.post( ApiValues.buildAbsolutePath( 'auth/refresh/token/long'), refreshPayload )
-                .then(function( response ){
-                    /* handling the success scenario */
-                    var refreshResult = response.data;
-
-                    //Setting the tokens provided
-                    TokenHandlerService.setLongDurationTokens(
-                        refreshResult.longDurationToken,
-                        refreshResult.extraLongDurationToken
-                    );
-
-                    //Resolving successfully the token refresh request
-                    refreshDefer.resolve( true );
-                }).catch(function( response ){
-                    /* handling the error response scenario */
-                    console.debug( JSON.stringify( response.data ));
-
-                    refreshDefer.reject( response.data );
-                });
-
-            return refreshDefer.promise;
         }
 
     }

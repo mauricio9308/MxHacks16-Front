@@ -1,51 +1,19 @@
 <div>
     <div style="margin-top: 50px;">&nbsp;</div>
-    <h3 class="col-md-12 text-center">Registro de nuevos usuarios administradores</h3>
+    <h3 class="col-md-12 text-center">Registro de nuevos usuarios</h3>
     <div class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
         <form name="vm.userForm" ng-submit="vm.signup(vm.userForm.$valid)" class="signin" novalidate autocomplete="off">
             <fieldset>
-                <!-- first name field -->
+                <!-- Name field -->
                 <div class="form-group" show-errors>
-                    <label for="firstName">Nombre(s)</label>
-                    <input type="text" id="firstName" name="firstName" class="form-control"
-                           ng-model="vm.userInformation.firstName" placeholder="Nombre(s)" required>
-                    <div ng-messages="vm.userForm.firstName.$error" role="alert">
+                    <label for="name">Nombre(s)</label>
+                    <input type="text" id="name" name="name" class="form-control"
+                           ng-model="vm.userInformation.name" placeholder="Nombre(s)" required>
+                    <div ng-messages="vm.userForm.name.$error" role="alert">
                         <p class="help-block error-text" ng-message="required">Debes proporcionar un nombre.</p>
                     </div>
                 </div>
-
-                <!-- last name field -->
-                <div class="form-group" show-errors>
-                    <label for="lastName">Apellidos</label>
-                    <input type="text" id="lastName" name="lastName" class="form-control"
-                           ng-model="vm.userInformation.lastName" placeholder="Apellidos" required>
-                    <div ng-messages="vm.userForm.lastName.$error" role="alert">
-                        <p class="help-block error-text" ng-message="required">Debes proporcionar tus apellidos.</p>
-                    </div>
-                </div>
-
-                <!-- Selector for the city selection -->
-                <label>Ciudad</label>
-                <br>
-                <md-input-container>
-                    <label>Ciudad</label>
-                    <md-select ng-model="vm.userInformation.city">
-                        <md-option ng-repeat="city in vm.cities" value="{{city._id}}">
-                            {{city.name}}
-                        </md-option>
-                    </md-select>
-                </md-input-container>
-
-                <!-- Telephone input field -->
-                <div class="form-group" show-errors>
-                    <label for="telephone">Teléfono</label>
-                    <input type="text" id="telephone" name="telephone" class="form-control"
-                           ng-model="vm.userInformation.telephone" placeholder="Teléfono" required>
-                    <div ng-messages="vm.userForm.telephone.$error" role="alert">
-                        <p class="help-block error-text" ng-message="required">Debes proporcionar un número de teléfono.</p>
-                    </div>
-                </div>
-
+                
                 <!-- email field -->
                 <div class="form-group" show-errors>
                     <label for="email">Correo Electrónico</label>
