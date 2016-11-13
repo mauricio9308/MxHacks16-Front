@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('cities')
+        .module('legislation')
         .config(routeConfig);
 
     routeConfig.$inject = ['$stateProvider'];
@@ -17,14 +17,14 @@
         $stateProvider
             .state('legislations-list', {
                 url: '/legislations',
-                templateUrl: 'modules/cities/client/views/cities.client.view.html',
-                controller: 'CitiesController',
+                templateUrl: 'modules/legislations/client/views/legislations.list.view.html',
+                controller: 'LegislationsController',
                 controllerAs: 'vm'
             })
             .state('legislation-detail',{
-                url: '/city/:legislation',
-                templateUrl: 'modules/cities/client/views/city.detail.client.view.html',
-                controller: 'CityDetailController',
+                url: '/legislation/:legislation',
+                templateUrl: 'modules/legislations/client/views/legislation.view.html',
+                controller: 'LegislationDetailController',
                 controllerAs: 'vm'
             });
     }

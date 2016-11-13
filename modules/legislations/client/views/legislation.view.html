@@ -1,0 +1,63 @@
+<div class="container animated fadeIn" style="width: 100%">
+    <div class="row">
+        <h4 class="col s12 m12 l12" id="title">{{ vm.legislation.name }}</h4>
+        <img class="col l5 m5 s12" src="http://d7.freedomworks.org.s3.amazonaws.com/field/image/Regulators-Grab-Legislative-Power-Congress.jpg"
+             alt="imagen">
+        <div class="col l7 m7 s12" id="description">{{ vm.legislation.text }}</div>
+        <div class="col s12 m12 l12">
+            <div class="col l6 m6 s12 center-align">
+                <h5 class="col s12 m12 l6 left">Aceptación</h5>
+                <a class="waves-effect waves-teal btn-flat col l6 m12 s12"><i class="material-icons center-align">thumbs_up_down</i>{{ vm.legislation.positiveVotes }} / {{ vm.legislation.negativeVotes }}</a>
+
+            </div>
+            <div class="col l6 m6 s12 center-align">
+                <h5 class="left col l2 m12 s12">Voto</h5>
+
+                <button class="btn waves-effect waves-light center-align col s12 m5 l4 animated bounceIn"
+                        type="submit" name="action" ng-click="vm.sendPositiveVote()">Aprobado
+                    <i class="material-icons left">thumb_up</i>
+                </button>
+                <button class="btn waves-effect waves-light center col s12 m5 l4 animated bounceIn"
+                        style="margin-left: 10px;"
+                        type="submit" name="action" ng-click="vm.sendNegativeVote()">Desaprobado
+                    <i class="material-icons left">thumb_down</i>
+                </button>
+            </div>
+        </div>
+
+        <br>
+        <hr>
+        <br>
+
+        <div class="col l12 m12 s12" id="agregarcomnetario">
+            <h5>Comentarios</h5>
+            <form name="vm.commentForm" ng-submit="vm.sendComment(vm.commentForm.$valid)">
+                <textarea name="comment" class="col s12 m12 l12" placeholder="Ingresa tu comentario" ng-model="vm.comment"
+                          type="text"></textarea>
+                <hr>
+                <div class="col s12 m12 l12">
+                    <br>
+                    <button class="btn waves-effect waves-light right animated"
+                            type="submit" name="action" >Enviar
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div id="comentarios" class="col s12 m12 l12">
+            <div class="flow-text" id="comentario" ng-repeat="comment in vm.comments">
+                <div class="chip">
+                    <img src="https://s-media-cache-ak0.pinimg.com/originals/28/c7/ad/28c7adffc9af705dcd8a8b77b1a9c0e8.jpg"
+                         alt="user">
+                    {{ comment.owner.name }}
+                </div>
+                <label>Dijo: </label>
+
+                <div class="col s12 m12 l12">
+                    {{ comment.text }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

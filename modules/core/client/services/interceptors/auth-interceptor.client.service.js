@@ -12,10 +12,6 @@
      * */
     function authInterceptor($q, $injector, TokenHandlerService, ApiValues, HttpBuffer) {
 
-        /* INTERCEPTOR FLAGS */
-        var isRefreshTokenOperationActive = false;
-        var tokenRefreshAttemptsCount = 0;
-
         //Public API for the request interceptor
         return {
             request : requestInterceptor,

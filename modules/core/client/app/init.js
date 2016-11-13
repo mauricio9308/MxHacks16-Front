@@ -23,7 +23,7 @@
     $httpProvider.interceptors.push('authInterceptor');
 
     /* setting the angular material custom theme */
-    $mdThemingProvider.theme('default').primaryPalette('blue');
+    $mdThemingProvider.theme('default').primaryPalette('grey');
   }
 
   // Then define the init function for starting up the application

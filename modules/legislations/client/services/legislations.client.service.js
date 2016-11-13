@@ -17,6 +17,7 @@
             deleteLegislation: deleteLegislation,
             createLegislationComment: createLegislationComment,
             createLegislationAnalysis : createLegislationAnalysis,
+            sendComment : sendComment,
             listLegislationComments :listLegislationComments,
             addNegativeVote : addNegativeVote,
             addPositiveVote : addPositiveVote
@@ -34,8 +35,10 @@
             /* obtaining the list of the legislation */
             $http.post(path)
                 .then(function (response) {
+                    console.log('Vote');
+
                     /* success getting the list of the legislation comments  */
-                    legislationVotePositiveDefer.resolve(response.data);
+                    legislationVotePositiveDefer.resolve();
                 }).catch(function (errorResponse) {
                 /* error getting the list of legislation comments */
                 legislationVotePositiveDefer.reject(errorResponse.data);
@@ -57,7 +60,7 @@
             $http.post(path)
                 .then(function (response) {
                     /* success getting the list of the legislation comments  */
-                    legislationVotePositiveDefer.resolve(response.data);
+                    legislationVotePositiveDefer.resolve();
                 }).catch(function (errorResponse) {
                 /* error getting the list of legislation comments */
                 legislationVotePositiveDefer.reject(errorResponse.data);
@@ -86,6 +89,29 @@
             });
 
             return legislationCommentsListDefer.promise;
+        }
+
+        /**
+         * Send a comments of a given legislation
+         * */
+        function sendComment( legislation, comment ){
+            // Sending a new comment
+            var sendCommentsListDefer = $q.defer();
+
+            // Build of the legislation path
+            var path = ApiValues.buildAbsolutePath('comments/' + legislation );
+
+            /* obtaining the list of the legislation */
+            $http.post(path, { legislation : legislation, text: comment })
+                .then(function (response) {
+                    /* success getting the list of the legislation comments  */
+                    sendCommentsListDefer.resolve(response.data);
+                }).catch(function (errorResponse) {
+                /* error getting the list of legislation comments */
+                sendCommentsListDefer.reject(errorResponse.data);
+            });
+
+            return sendCommentsListDefer.promise;
         }
 
         /**
@@ -298,6 +324,9 @@
 
             return legislationListDefer.promise;
         }
+
+
+
 
     }
 

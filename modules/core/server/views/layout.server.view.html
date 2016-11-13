@@ -16,6 +16,9 @@
     <!-- Fav Icon -->
     <link href="{{favicon}}" rel="shortcut icon" type="image/x-icon">
 
+    <!-- JS jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
     <!-- Google Font for the Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -72,7 +75,7 @@
     </md-sidenav>
 
     <!-- Container for the ui-view -->
-    <section class="container">
+    <section class="container" style="width:100%">
         {% block content %}{% endblock %}
     </section>
 

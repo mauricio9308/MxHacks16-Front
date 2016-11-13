@@ -1,7 +1,7 @@
 <!-- List of the legislation available in the server -->
 <section>
     <!-- Loading container -->
-    <md-content ng-show="vm.isLoading">
+    <md-content ng-show="vm.isLoading" style="background: #EDEDED">
         <md-progress-circular
                 class="center-horizontal"
                 md-mode="indeterminate"
@@ -10,7 +10,7 @@
     </md-content>
 
     <!-- Error container -->
-    <md-content ng-show="!vm.isLoading && vm.isInErrorState">
+    <md-content ng-show="!vm.isLoading && vm.isInErrorState" style="background: #EDEDED">
         <div class="center-horizontal">
             <h1>¡Oh no! Hubo un error</h1>
             <p>{{ vm.errorMessage }}</p>
@@ -19,24 +19,46 @@
     </md-content>
 
     <!-- List container -->
-    <md-content ng-hide="vm.isLoading || vm.isInErrorState">
-        <h1>Legislaciones</h1>
+    <md-content ng-hide="vm.isLoading || vm.isInErrorState" style="background: #EDEDED">
+        <!-- Legislations -->
+        <h3>Legislaciones</h3>
 
-        <!-- Container for the list of items in the platform -->
-        <md-list>
-            <md-list-item class="md-2-line ripple-container" md-ink-ripple
-                          ng-repeat="item in vm.items">
-                <div class="md-list-item-text">
-                    <h3>{{ item.name }}</h3>
-                    <p>{{ item.name }}</p>
+        <!-- Container for the list of legislations -->
+        <div class="row">
+            <div class="col l4 m6 s12 animated zoomIn" ng-repeat="legislation in vm.items">
+                <div class="card hoverable">
+                    <div class="card-image">
+                        <img src="http://d7.freedomworks.org.s3.amazonaws.com/field/image/Regulators-Grab-Legislative-Power-Congress.jpg">
+                        <span class="card-title">Ley 3 de 3 {{ legislation.name }}</span>
+                    </div>
+                    <div class="card-content">
+                        <p>{{ legislation.text }}</p>
+                    </div>
+                    <div class="card-action" ng-click="vm.onItemClick( legislation )">
+                        <a>Ver más</a>
+                    </div>
                 </div>
-            </md-list-item>
-        </md-list>
+            </div>
+        </div>
 
-        <!-- Button for adding new cities -->
-        <md-button class="md-fab fab-button" aria-label="Añadir Legislación">
-            <md-icon md-font-library="material-icons">add</md-icon>
-        </md-button>
+        <h3>Políticos</h3>
+
+        <div class="row">
+            <div class="col l4 m6 s12 animated zoomIn" ng-repeat="politic in vm.politicians">
+                <div class="card hoverable">
+                    <div class="card-image">
+                        <img ng-src="{{ politic.image }}">
+                        <span class="card-title">{{ politic.name }}</span>
+                    </div>
+                    <div class="card-content">
+                        <p>{{ politic.description }}</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="profile.html">Ver más</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </md-content>
 </section>

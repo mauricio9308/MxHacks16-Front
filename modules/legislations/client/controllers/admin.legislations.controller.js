@@ -61,7 +61,7 @@
          * */
         vm.onRefreshClicked = function(){
             // We simply call the refresh cycle right now
-            fetchCities();
+            fetchItems();
         };
 
         /**
