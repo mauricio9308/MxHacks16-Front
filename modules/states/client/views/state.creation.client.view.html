@@ -1,0 +1,53 @@
+<!-- Dialog for the creation of a given state -->
+<md-dialog aria-label="Country Creation Dialog" class="simple-form-dialog" ng-cloak>
+    <form name="stateCreationForm" novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Crear estado</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="vm.cancel( stateCreationForm )">
+                    <md-icon md-font-library="material-icons">close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+
+                <!-- Input for the name -->
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Nombre</label>
+                    <input name="name" ng-model="vm.stateInformation.name" required>
+                    <div ng-messages="stateCreationForm.name.$error"
+                         ng-show="stateCreationForm.$submitted || stateCreationForm.name.$touched"
+                         role="alert" multiple>
+                        <div ng-message="required">Debes proporcionar un nombre de país</div>
+                    </div>
+                </md-input-container>
+
+                <!-- Input for the country selection -->
+                <md-input-container class="md-block">
+                    <label>País</label>
+                    <md-select ng-model="vm.selectedCountry" ng-change="vm.onCountrySelected()" required>
+                        <md-option ng-repeat="country in vm.countries" value="{{country._id}}">
+                            {{ country.name }}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+
+        <!-- Container for the actions for the country creation -->
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="vm.cancel( stateCreationForm )" type="button">
+                Cancelar
+            </md-button>
+            <md-button ng-click="vm.createState( stateCreationForm )"
+                       type="submit"
+                       class="md-primary md-raised"
+                       style="margin-right:20px;">
+                Crear
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

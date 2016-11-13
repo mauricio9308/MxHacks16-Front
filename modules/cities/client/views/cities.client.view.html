@@ -1,0 +1,51 @@
+<!-- Home page for the Fixin Administrator -->
+<section>
+    <!-- Loading container -->
+    <md-content ng-show="vm.isLoading">
+        <md-progress-circular
+                class="center-horizontal"
+                md-mode="indeterminate"
+                md-diameter="100">
+        </md-progress-circular>
+    </md-content>
+
+    <!-- Error container -->
+    <md-content ng-show="!vm.isLoading && vm.isInErrorState">
+        <div class="center-horizontal">
+            <h1>¡Oh no! Hubo un error</h1>
+            <p>{{ vm.errorMessage }}</p>
+            <md-button class="md-primary md-raised" ng-click="vm.onRefreshClicked()">Reintentar</md-button>
+        </div>
+    </md-content>
+
+    <!-- List container -->
+    <md-content ng-hide="vm.isLoading || vm.isInErrorState">
+        <h1>Ciudades</h1>
+
+        <!-- Filter for the level selection -->
+        <div layout="row" layout-sm="column">
+            <md-select ng-model="ctrl.userState">
+                <md-option ng-repeat="state in ctrl.states" value="{{state.abbrev}}">
+                    {{state.abbrev}}
+                </md-option>
+            </md-select>
+        </div>
+
+        <!-- Container for the list of cities in the platform -->
+        <md-list>
+            <md-list-item class="md-2-line ripple-container"  md-ink-ripple
+                          ng-repeat="city in vm.cities">
+                <div class="md-list-item-text">
+                    <h3>{{ city.name }}</h3>
+                    <p>Estado sin definir</p>
+                </div>
+            </md-list-item>
+        </md-list>
+
+        <!-- Button for adding new cities -->
+        <md-button class="md-fab fab-button" aria-label="Añadir ciudad">
+            <md-icon md-font-library="material-icons">add</md-icon>
+        </md-button>
+
+    </md-content>
+</section>

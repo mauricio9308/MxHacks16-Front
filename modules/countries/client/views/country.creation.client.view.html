@@ -1,0 +1,55 @@
+<!-- Dialog for the creation of a given country -->
+<md-dialog aria-label="Country Creation Dialog" class="simple-form-dialog" ng-cloak>
+    <form name="countryCreationForm" novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Crear país</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="vm.cancel( countryCreationForm )">
+                    <md-icon md-font-library="material-icons">close</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+
+                <!-- Input for the name -->
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Nombre</label>
+                    <input name="name" ng-model="vm.countryInformation.name" placeholder="Nombre" required>
+                    <div ng-messages="countryCreationForm.name.$error"
+                         ng-show="countryCreationForm.$submitted || countryCreationForm.name.$touched"
+                         role="alert" multiple>
+                        <div ng-message="required">Debes proporcionar un nombre de país</div>
+                    </div>
+                </md-input-container>
+
+                <!-- Container for the country code -->
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Código de País</label>
+                    <input name="countryCode" ng-model="vm.countryInformation.countryCode" placeholder="Código de País"
+                           required md-maxlength="3">
+                    <div ng-messages="countryCreationForm.countryCode.$error" role="alert" multiple>
+                        <div ng-message="required">Debes brindar un código de país</div>
+                        <div ng-message="md-maxlength">Un código de país no puede tener más de 3 caracteres</div>
+                    </div>
+                </md-input-container>
+
+            </div>
+        </md-dialog-content>
+
+        <!-- Container for the actions for the country creation -->
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="vm.cancel( countryCreationForm )" type="button">
+                Cancelar
+            </md-button>
+            <md-button ng-click="vm.createCountry( countryCreationForm )"
+                       type="submit"
+                       class="md-primary md-raised"
+                       style="margin-right:20px;">
+                Crear
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

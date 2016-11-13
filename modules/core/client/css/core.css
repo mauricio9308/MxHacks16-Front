@@ -1,0 +1,147 @@
+.content {
+    margin-top: 50px;
+}
+
+.undecorated-link:hover {
+    text-decoration: none;
+}
+
+[ng\:cloak],
+[ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+    display: none !important;
+}
+
+.header-profile-image {
+    opacity: 0.8;
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.open .header-profile-image,
+a:hover .header-profile-image {
+    opacity: 1;
+}
+
+.user-header-dropdown-toggle {
+    padding-top: 11px !important;
+    padding-bottom: 11px !important;
+}
+
+.user-primary-account {
+    font-size: 30px;
+    top: 10px;
+    right: 10px;
+    position: absolute;
+}
+
+.error-text {
+    display: none;
+}
+
+.has-error .help-block.error-text {
+    display: block;
+}
+
+.has-error .help-inline.error-text {
+    display: inline;
+}
+
+/* Home page styles */
+img#home-brand {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+    display: block;
+}
+
+md-card#home-hero-card {
+    transform: translateY(25%);
+    -webkit-transform: translateY(25%);
+    -moz-transform: translateY(25%);
+}
+
+p#home-hero-text {
+    text-align: center;
+    width: 100%;
+    color: black;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+p#home-description-text {
+    text-align: center;
+    width: 100%;
+    color: black;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+button#card-login-button {
+    margin: 0 auto;
+}
+
+/* authentication styles */
+div.auth-alert {
+    margin-top: 20px;
+}
+
+img.circle-image {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-right: 16px;
+    border-radius: 50%;
+    box-sizing: content-box;
+    width: 40px;
+    height: 40px;
+}
+
+.ripple-container {
+    position: relative;
+}
+
+.center-horizontal {
+    margin: 0 auto;
+}
+
+section.main-section-container {
+    height: 100vh;
+    top: 64px;
+    position: relative;
+}
+
+.md-button.fab-button {
+    position: fixed;
+    right: 32px;
+    bottom: 32px;
+}
+
+md-dialog.simple-form-dialog {
+    width: 800px;
+}
+
+/* fix for the md-select not rendering properly */
+.md-select-menu-container {
+    z-index: 99999999 !important;
+}
+
+.filter-container {
+    margin: 5px;
+    padding: 10px;
+}
+
+.filter-container h4.filter-container-title {
+    display: block;
+    float: left;
+    margin-left: 20px;
+}
+
+.filter-container md-icon.filter-container-title-badge {
+    float: left;
+    display: block;
+    margin-top: 7px;
+}

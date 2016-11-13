@@ -1,0 +1,25 @@
+<div ng-controller="HeaderController as vm">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" aria-label="Settings" ng-click="vm.toggleSectionsSidebar()">
+        <md-icon md-font-set="material-icons">menu</md-icon>
+      </md-button>
+      <h2>
+        <span>Administrador</span>
+      </h2>
+      <span flex></span>
+
+      <!-- Button for user log in -->
+      <md-button ng-click="vm.goToLogin()" ng-hide="vm.isUserLoggedIn">
+          Iniciar sesión
+      </md-button>
+      <md-button ng-click="vm.logout()" ng-show="vm.isUserLoggedIn">
+          Cerrar sesión
+      </md-button>
+
+      <md-button class="md-icon-button" aria-label="More">
+        <md-icon md-font-set="material-icons">more_vert</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+</div>

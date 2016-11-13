@@ -1,0 +1,61 @@
+<!-- Template for the display of the country information -->
+<section>
+
+    <!-- Container for the country information -->
+    <form novalidate name="countryEditForm">
+        <md-content>
+            <h1>Detalle de país</h1>
+
+            <div id="loading-container">
+                <md-progress-circular
+                        ng-show="vm.isLoading"
+                        class="center-horizontal"
+                        md-mode="indeterminate"
+                        md-diameter="100">
+                </md-progress-circular>
+            </div>
+
+            <div id="detail-form-container" ng-hide="vm.isLoading">
+                <br> <!-- Simple vertical space -->
+
+                <!-- Input for the name -->
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Nombre</label>
+                    <input name="name" ng-model="vm.countryInfo.name" placeholder="Nombre" required>
+                    <div ng-messages="countryEditForm.name.$error"
+                         ng-show="countryEditForm.$submitted || countryEditForm.name.$touched"
+                         role="alert" multiple>
+                        <div ng-message="required">Debes proporcionar un nombre de país</div>
+                    </div>
+                </md-input-container>
+
+                <!-- Container for the country code -->
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Código de País</label>
+                    <input name="countryCode" ng-model="vm.countryInfo.countryCode" placeholder="Código de País"
+                           required md-maxlength="3">
+                    <div ng-messages="countryEditForm.countryCode.$error" role="alert" multiple>
+                        <div ng-message="required">Debes brindar un código de país</div>
+                        <div ng-message="md-maxlength">Un código de país no puede tener más de 3 caracteres</div>
+                    </div>
+                </md-input-container>
+
+                <!-- Container for the actions of the view -->
+                <section id="detail-actions">
+                    <div flex></div>
+                    <md-button ng-click="vm.cancel( countryEditForm )" type="button">
+                        Regresar
+                    </md-button>
+                    <md-button ng-click="vm.updateCountry( countryEditForm )"
+                               type="submit"
+                               class="md-primary md-raised"
+                               style="margin-right:20px;">
+                        Actualizar
+                    </md-button>
+                </section>
+
+            </div>
+        </md-content>
+    </form>
+
+</section>

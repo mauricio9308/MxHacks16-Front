@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <base href="/">
+    <title page-title></title>
+    <meta name="description" content="{{description}}">
+    <meta name="fragment" content="!">
+
+    <!-- Apple META -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Fav Icon -->
+    <link href="{{favicon}}" rel="shortcut icon" type="image/x-icon">
+
+    <!-- Google Font for the Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Application CSS Files -->
+    {% for cssFile in cssFiles %}
+    <link rel="stylesheet" href="{{cssFile}}">
+    {% endfor %}
+</head>
+
+<body class="ng-cloak">
+<header ng-include="'/modules/core/client/views/header.client.view.html'" class="navbar navbar-fixed-top"></header>
+<section layout="row" flex
+         class="main-section-container"
+         ng-controller="BaseLayoutController as vm">
+
+    <!-- Sidebar navigation for the main app sections -->
+    <md-sidenav
+            class="md-sidenav-left"
+            md-component-id="main-sidebar"
+            md-is-locked-open="$mdMedia('gt-md') && vm.isUserLoggedIn"
+            md-disable-backdrop
+            style="position: fixed; top: 64px;"
+            md-whiteframe="4">
+        <md-toolbar class="md-theme-indigo" layout="row">
+            <img class="circle-image" src="modules/core/client/img/brand/admin-logo.jpg" style="margin-left: 16px;padding-right: -10px;margin-right: 0px;">
+            <h1 class="md-toolbar-tools" flex style="padding-bottom: 10px;">mauricio9308@gmail.com</h1>
+        </md-toolbar>
+        <md-content layout-padding ng-controller="SideNavController as vm">
+            <md-subheader class="md-no-sticky">Administración de Usuarios</md-subheader>
+            <md-list-item md-ink-ripple>
+                <p>Usuarios</p>
+            </md-list-item>
+            <md-list-item md-ink-ripple>
+                <p>Trabajadores</p>
+            </md-list-item>
+
+            <md-divider></md-divider>
+            <md-subheader class="md-no-sticky">Administración de Regiones</md-subheader>
+            <md-list-item md-ink-ripple >
+                <p ui-sref="city-list">Ciudades</p>
+            </md-list-item>
+            <md-list-item md-ink-ripple >
+                <p ui-sref="state-list">Estados</p>
+            </md-list-item>
+            <md-list-item md-ink-ripple >
+                <p ui-sref="country-list">Paises</p>
+            </md-list-item>
+
+            <md-divider></md-divider>
+            <md-subheader class="md-no-sticky">Administración de Contenido</md-subheader>
+            <md-list-item md-ink-ripple>
+                <p>Reportes</p>
+            </md-list-item>
+            <md-list-item md-ink-ripple>
+                <p>Reseñas</p>
+            </md-list-item>
+            <md-list-item md-ink-ripple>
+                <p>Categorías</p>
+            </md-list-item>
+            <md-divider></md-divider>
+        </md-content>
+    </md-sidenav>
+
+    <!-- Container for the ui-view -->
+    <section class="container">
+        {% block content %}{% endblock %}
+    </section>
+
+</section>
+
+<!--Application JavaScript Files-->
+{% for jsFile in jsFiles %}
+<script type="text/javascript" src="{{jsFile}}"></script>
+{% endfor %}
+
+{% if livereload %}
+<!--Livereload script rendered -->
+<script type="text/javascript" src="{{host}}:35729/livereload.js"></script>
+{% endif %}
+</body>
+
+</html>
