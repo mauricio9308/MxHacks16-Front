@@ -1,10 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="container" style="width: 100%">
+    <div class="column">
+        <form name="vm.analysisForm" ng-submit="vm.sendAnalysis(vm.analysisForm.$valid)">
+            <br>
+            <div class="col s3"></div>
+            <h3>Creación de nuevo análisis</h3>
+            <br>
 
-</body>
-</html>
+            <div class="row">
+                <!-- Information of the legislation to discuss -->
+                <h4 class="col s12 m12 l12" id="title">{{ vm.legislation.name }}</h4>
+                <img class="col l5 m5 s12"
+                     src="http://d7.freedomworks.org.s3.amazonaws.com/field/image/Regulators-Grab-Legislative-Power-Congress.jpg"
+                     alt="imagen">
+                <div class="col l7 m7 s12" id="description">{{ vm.legislation.text }}</div>
+            </div>
+
+
+            <!-- Container for the legislation contents -->
+            <div class="input-field col s12" style="margin-top: 50px;">
+                <!---->
+                <textarea id="textarea1" ng-model="vm.analysis"
+                          class="materialize-textarea" rows="32" cols="32" style="min-height: 300px;"></textarea>
+                <label for="textarea1">Análisis de Legislación</label>
+            </div>
+
+            <button class="btn waves-effect waves-light right animated bounceIn right" type="submit" name="action">Enviar
+                <i class="material-icons right">send</i>
+            </button>
+
+            <!--<div class="col l12">-->
+        </form>
+    </div>
+
+    </form>
+</div>
+</div>

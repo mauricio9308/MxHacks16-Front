@@ -6,12 +6,12 @@
         .controller('LegislationDetailController', LegislationDetailController);
 
     //We inject the dependencies
-    LegislationDetailController.$inject = ['$scope', '$stateParams', 'LegislationService', 'ToastService'];
+    LegislationDetailController.$inject = ['$scope', '$stateParams', 'LegislationService', 'ToastService', '$state'];
 
     /**
      * Controller in charge of the handling of the item list view
      * */
-    function LegislationDetailController( $scope, $stateParams, LegislationService, ToastService ){
+    function LegislationDetailController( $scope, $stateParams, LegislationService, ToastService, $state){
         //Setting the reference of the instance
         var vm = this;
 
@@ -39,7 +39,6 @@
          * Fetch of the Legislation Comments
          * */
         function fetchLegislationComments(){
-
             /* makes the http request for the items */
             LegislationService.listLegislationComments($stateParams.legislation).then(function( response ){
                 /* handling of the items response */
@@ -50,10 +49,25 @@
                 console.log( errorResponse );
             });
         }
+        /**
+         * Fetch of the Legislation Analysis
+         * */
+        function fetchLegislationAnalysis(){
+            /* makes the http request for the items */
+            LegislationService.listLegislationAnalysis($stateParams.legislation).then(function( response ){
+                /* handling of the items response */
+                console.log( 'Loaded legislation comments: ' + JSON.stringify(response ) );
+                vm.analysis = response;
+            }).catch(function( errorResponse ){
+                /* handling of the error response */
+                console.log( errorResponse );
+            });
+        }
 
         //On the first load we call the items fetch
         fetchLegislation();
         fetchLegislationComments();
+        fetchLegislationAnalysis();
 
 
         /**
@@ -117,6 +131,17 @@
                 ToastService.showToast( errorResponse.message );
             });
         };
+
+        /**
+         * Callback for the open of a politic view
+         * */
+        vm.viewPolitician = function( politic ){
+            $state.go('politician-detail', { id: politic._id});
+        };
+
+        vm.createAnalysis = function( legislation ){
+            $state.go('create-analysis', { legislation: legislation._id})
+        }
     }
 
 }());

@@ -15,16 +15,16 @@
 
         /* we register the states associated with the cities */
         $stateProvider
-            .state('legislations-list', {
-                url: '/legislations',
-                templateUrl: 'modules/legislations/client/views/legislations.list.view.html',
-                controller: 'LegislationsController',
-                controllerAs: 'vm'
-            })
-            .state('legislation-detail',{
-                url: '/legislation/:legislation',
-                templateUrl: 'modules/legislations/client/views/legislation.view.html',
-                controller: 'LegislationDetailController',
+            //.state('politician-list', {
+            //    url: '/legislations',
+            //    templateUrl: 'modules/politician/client/views/legislations.list.view.html',
+            //    controller: 'LegislationsController',
+            //    controllerAs: 'vm'
+            //})
+            .state('politician-detail',{
+                url: '/politician/:id',
+                templateUrl: 'modules/politician/client/views/politician.profile.view.html',
+                controller: 'PoliticianController',
                 controllerAs: 'vm'
             });
     }

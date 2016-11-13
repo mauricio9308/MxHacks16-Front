@@ -60,6 +60,12 @@
             PoliticianService.getPoliticians().then(function( response ){
                 /* handling of the items response */
                 console.log( 'Response for politicians: ' + JSON.stringify(response) );
+
+                var politic;
+                for( politic of response ){
+                    politic.description = politic.description.substring(0,100)
+                }
+
                 vm.politicians = response;
             }).catch(function( errorResponse ){
                 /* handling of the error response */
@@ -87,6 +93,14 @@
         vm.onItemClick = function( legislation ){
             console.log('GO');
             $state.go('legislation-detail', { legislation: legislation._id });
+        };
+
+        /**
+         * Callback for the open of a politic view
+         * */
+        vm.viewPolitician = function( politic ){
+            console.log('view politician: ' + JSON.stringify(politic));
+            $state.go('politician-detail', { id: politic._id});
         };
 
 

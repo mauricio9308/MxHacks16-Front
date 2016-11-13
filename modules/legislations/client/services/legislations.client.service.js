@@ -19,6 +19,7 @@
             createLegislationAnalysis : createLegislationAnalysis,
             sendComment : sendComment,
             listLegislationComments :listLegislationComments,
+            listLegislationAnalysis : listLegislationAnalysis,
             addNegativeVote : addNegativeVote,
             addPositiveVote : addPositiveVote
         };
@@ -89,6 +90,28 @@
             });
 
             return legislationCommentsListDefer.promise;
+        }
+
+        /**
+         * Obtains the analysis of a given legislation
+         * */
+        function listLegislationAnalysis( legislation ){
+            var legislationAnalysisListDefer = $q.defer();
+
+            // Build of the legislation path
+            var path = ApiValues.buildAbsolutePath('analysis/' + legislation );
+
+            /* obtaining the list of the legislation analysis */
+            $http.get(path)
+                .then(function (response) {
+                    /* success getting the list of the legislation comments  */
+                    legislationAnalysisListDefer.resolve(response.data);
+                }).catch(function (errorResponse) {
+                /* error getting the list of legislation comments */
+                legislationAnalysisListDefer.reject(errorResponse.data);
+            });
+
+            return legislationAnalysisListDefer.promise;
         }
 
         /**

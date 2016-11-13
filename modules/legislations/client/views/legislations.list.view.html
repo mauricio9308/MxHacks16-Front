@@ -48,13 +48,13 @@
                 <div class="card hoverable">
                     <div class="card-image">
                         <img ng-src="{{ politic.image }}">
-                        <span class="card-title">{{ politic.name }}</span>
+                        <span class="card-title">{{ politic.name | limitTo: 40 }}</span>
                     </div>
                     <div class="card-content">
                         <p>{{ politic.description }}</p>
                     </div>
-                    <div class="card-action">
-                        <a href="profile.html">Ver más</a>
+                    <div class="card-action" ng-click="vm.viewPolitician( politic )">
+                        <a>Ver más</a>
                     </div>
                 </div>
             </div>

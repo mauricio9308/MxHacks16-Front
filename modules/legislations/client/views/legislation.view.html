@@ -23,11 +23,58 @@
                     <i class="material-icons left">thumb_down</i>
                 </button>
             </div>
+
+            <!-- Container for adding a curated analysis -->
+            <div class="col l12 m12 s12 center-align">
+                <br>
+                <br>
+                <button class="btn waves-effect waves-light center-align col s12 m5 l4 animated bounceIn" style="margin-bottom: 20px;"
+                        type="submit" name="action" ng-click="vm.createAnalysis( vm.legislation )">Crear Análisis
+                </button>
+                <br>
+                <br>
+            </div>
+
         </div>
 
+        <!-- Container for the politics that support the initiative -->
         <br>
-        <hr>
+        <div class="col l12 m12 s12" id="description" style="font-size: 30px;">Políticos que la apoyan</div>
         <br>
+        <div class="row">
+            <div class="col l2 m4 s6 animated zoomIn" ng-repeat="politic in vm.legislation.politicians">
+                <div class="card hoverable">
+                    <div class="card-image">
+                        <img ng-src="{{ politic.image }}">
+                        <span class="card-title">{{ politic.name }}</span>
+                    </div>
+                    <div class="card-action" ng-click="vm.viewPolitician( politic )">
+                        <a>Ver más</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Container for the analysis that support the initiative -->
+        <div ng-show="vm.analysis && vm.analysis.length > 0">
+            <br>
+            <div class="col l12 m12 s12" id="description" style="font-size: 30px;">Análisis</div>
+            <br>
+            <div class="row">
+                <div class="col l2 m4 s6 animated zoomIn" ng-repeat="item in vm.analysis">
+                    <div class="card hoverable">
+                        <div class="card-image">
+                            <img src="http://d32ogoqmya1dw8.cloudfront.net/images/sp/carl_ltc/wacn/writing.jpg">
+                            <span class="card-title">{{ item.text }}</span>
+                        </div>
+                        <div class="card-action" ng-click="vm.viewAnalysis( politic )">
+                            <a>Ver más</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="col l12 m12 s12" id="agregarcomnetario">
             <h5>Comentarios</h5>
